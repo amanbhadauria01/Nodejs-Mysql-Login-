@@ -21,12 +21,12 @@ db.connect((err)=>{
 })
 const publicDirectory = path.join(__dirname,'./public');
 app.use(express.static(publicDirectory));
+app.use(express.urlencoded({extended:false}));
+app.use(express.json());
 app.set('view engine','hbs');
 
-app.get("/",(req,res)=>{
-    res.render("index.hbs");
-})
-
+app.use('/',require('./routes/pages.js'));
+app.use('/auth',require('./routes/auth.js'));
 app.listen(3000,()=>{
     console.log("Server started");
 })
