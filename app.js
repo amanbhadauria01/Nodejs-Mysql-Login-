@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 dotenv.config({path : './.env'});
+const PORT = process.env.PORT || 3000; 
 
 const db = mysql.createConnection({
     host     : process.env.DATABASE_HOST,
@@ -29,6 +30,6 @@ app.set('view engine','hbs');
 
 app.use('/',require('./routes/pages.js'));
 app.use('/auth',require('./routes/auth.js'));
-app.listen(3000,()=>{
-    console.log("Server started at 3000");
+app.listen(PORT,()=>{
+    console.log(`Listening on Port ${PORT}`);
 })
